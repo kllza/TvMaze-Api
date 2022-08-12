@@ -1,8 +1,9 @@
 export interface IDat {
-  id: string;
+  id: number;
   name: string;
-  summary: string;
-  image: string;
+  image: {medium: string};
+  genres: [string];
+  rating: {average: number};
 }
 
 export interface IData {

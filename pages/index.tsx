@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import {GetStaticProps} from 'next';
 import Head from 'next/head';
-import {useState} from 'react';
+import {FC, useState} from 'react';
+import CardList from '../components/CardList';
 
-import Card from '../components/Card';
 import Search from '../components/Search';
+import {IData} from '../share/interface';
 
-const Home = ({data}: any) => {
+const Home: FC<IData> = ({data}) => {
   console.log(data);
 
   const [search, setSearch] = useState('');
@@ -19,30 +19,57 @@ const Home = ({data}: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className="bg-gray-500">
+      <div>
         <Search setSearch={setSearch}></Search>
-        <ul className="">
-          {data
-            .filter((val: any) => {
-              if (search == '') {
-                return val;
-              } else if (
-                val.name.toLowerCase().includes(search.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map(({id, name, image, genres}: any) => (
-              <div key={id}>
-                <p>
+      </div>
+      {/* <div>Action</div> */}
+
+      {data
+        .filter((val: any) => {
+          if (search == '') {
+            return val;
+          } else if (val.name.toLowerCase().includes(search.toLowerCase())) {
+            return val;
+          }
+        })
+        .map(x => (
+          <div key={x.id}>
+            <div className="flex">
+              <CardList x={x} genres={'Action'} />
+            </div>
+            <br />
+            <br />
+            <br />
+            <CardList x={x} genres={'Drama'} />
+
+            {/* <CardList x={x} genres={'Drama'} /> */}
+
+            {/* <p>
                   {id} - {name}
                   <img src={image.medium} />
-                </p>
-                {/* <div className="justify-between bg-gray-600">
+                </p> */}
+            {/* <div className="">
                   {id <= 50 ? (
-                    genres[0] === 'Action' ? (
-                      <div className="bg-red-400 ">
-                        <p>
+                    genres['0'] === 'Action' ? (
+                      <div className="bg-gray-600">
+                        <p className="">
+                          {id} - {name}
+                          <img src={image.medium} />
+                        </p>
+                      </div>
+                    ) : (
+                      ''
+                    )
+                  ) : (
+                    ''
+                  )}
+                </div>
+              
+                <div className="">
+                  {id <= 50 ? (
+                    genres[0] === 'Drama' ? (
+                      <div className="bg-red-900 ">
+                        <p className="">
                           {id} - {name}
                           <img src={image.medium} />
                         </p>
@@ -54,12 +81,8 @@ const Home = ({data}: any) => {
                     ''
                   )}
                 </div> */}
-
-                {/* <div>{genres}</div> */}
-              </div>
-            ))}
-        </ul>
-      </div>
+          </div>
+        ))}
     </>
   );
 };
