@@ -1,50 +1,30 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
-const CardList = ({x, genres}: any) => {
-  return (
-    <>
-      <div className="bg-gray-400">
-        {/* {x.id} - {x.name}
-        {x.rating.average}
-        <img src={x.image.medium} /> */}
-        {/* {x.genres === genres} */}
-        {/*  {x.genres[0] === 'Action' ? (
-          <div className="bg-gray-400">
-            
+import Link from 'next/link';
+import {FC} from 'react';
+import {IDat} from '../share/interface';
+import Card from './Card';
+interface CardListProps {
+  moviesArray: IDat[];
+}
 
-            <img src={x.image.medium} />
-          </div>
-        ) : (
-          ''
-        )} */}
-        {x.rating.average >= 7 ? (
-          x.genres['0'] === genres ? (
-            <div className="bg-gray-60">
-              <img src={x.image.medium} />
-            </div>
-          ) : (
-            ''
-          )
-        ) : (
-          ''
-        )}
-        {/* <div className=""> </div>
-        {x.id <= 110 ? (
-          x.genres['0'] === 'Drama' ? (
-            <div className="bg-gray-600">
-              <p className="">
-                <img src={x.image.medium} />
-              </p>
-            </div>
-          ) : (
-            ''
-          )
-        ) : (
-          ''
-        )} */}
-      </div>
-    </>
+const CardList: FC<CardListProps> = ({moviesArray}) => {
+  /* console.log(moviesArray); */
+  return (
+    <div className="flex">
+      {moviesArray.map((movie, index) => {
+        return (
+          <>
+            <Link href={`/movie/${movie.id}`}>
+              <a target="_blank">
+                <Card imageUrl={movie.image.medium} key={'Card' + index} />
+              </a>
+            </Link>
+          </>
+        );
+      })}
+    </div>
   );
 };
 
