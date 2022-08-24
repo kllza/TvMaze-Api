@@ -6,7 +6,7 @@ import {CardProps} from '../share/interface';
 const Card: FC<CardProps> = ({imageUrl}) => {
   return (
     <>
-      <div className="">
+      <div className="flex justify-center m-2 lg:m-0">
         <img src={imageUrl} />
       </div>
     </>

@@ -12,7 +12,7 @@ interface CardListProps {
 const CardList: FC<CardListProps> = ({moviesArray}) => {
   /* console.log(moviesArray); */
   return (
-    <div className="flex">
+    <div className="lg:flex sm:flex lg:space-x-4">
       {moviesArray.map((movie, index) => {
         return (
           <>

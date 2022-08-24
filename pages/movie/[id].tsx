@@ -21,6 +21,11 @@ const Index: FC<IData> = ({data}) => {
           <br />
           {data.summary}
         </p>
+        <div>
+          {data.schedule.days}
+          <br />
+          {data.schedule.time}
+        </div>
       </div>
     </>
   );

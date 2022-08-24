@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Head from 'next/head';
-import Link from 'next/link';
+
 import {FC, useState} from 'react';
 import CardList from '../components/CardList';
 import Search from '../components/Search';
@@ -22,7 +22,27 @@ const Home: FC<IData> = ({data}) => {
   const Comedy = data.filter(
     data => data.genres[0] === 'Comedy' && data.rating.average > 8,
   );
-  /* const [search, setSearch] = useState(''); */
+  const [search, setSearch] = useState('');
+
+  /*  const filtrar = (search: any) => {
+    var resultadoBusqueda = data.filter(elemento => {
+      if (
+        elemento.name.toString().toLowerCase().includes(search.toLowerCase())
+      ) {
+        return elemento;
+      }
+    });
+    setSearch(resultadoBusqueda);
+  }; */
+
+  const Filter = data.filter(val => {
+    if (search == '') {
+      return '';
+    } else if (val.name.toLowerCase().includes(search.toLowerCase())) {
+      /* console.log(val.name); */
+      return val.name;
+    }
+  });
 
   return (
     <>
@@ -34,8 +54,8 @@ const Home: FC<IData> = ({data}) => {
       {/* {data.map(({id, name, genres, image, rating}) => (
         <div key={id}></div>
       ))} */}
-      {/*  <Search setSearch={setSearch}></Search>
-      {data
+      <Search setSearch={setSearch}></Search>
+      {/*  {data
         .filter((val: any) => {
           if (search == '') {
             return val;
@@ -46,18 +66,23 @@ const Home: FC<IData> = ({data}) => {
         .map(({name, id}) => (
           <div key={id}></div>
         ))} */}
+      <div className="bg-gray">
+        <div className="bg-back flex justify-center p-2 m-2">
+          <CardList moviesArray={Filter}></CardList>
+        </div>
 
-      <div>
-        Action
-        <CardList moviesArray={Action} />
-      </div>
-      <div>
-        Drama
-        <CardList moviesArray={Drama} />
-      </div>
-      <div>
-        Comedy
-        <CardList moviesArray={Comedy} />
+        <div className="text-center pb-6 lg:px-4 bg-red-300">
+          <p className="m-4 text-xl">Action</p>
+          <CardList moviesArray={Action} />
+        </div>
+        <div className="text-center pb-6 lg:px-4 bg-blue-400">
+          <p className="m-4 text-xl">Drama</p>
+          <CardList moviesArray={Drama} />
+        </div>
+        <div className="text-center pb-6 px-4 bg-yellow-400">
+          <p className="m-4 text-xl">Comedy</p>
+          <CardList moviesArray={Comedy} />
+        </div>
       </div>
     </>
   );
