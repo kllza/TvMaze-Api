@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import {FC} from 'react';
-import {IDat, IData} from '../../share/interface';
+import {IDat, ParamsProps} from '../../share/interface';
 
-const Index: FC<IData> = ({data}) => {
+const Index: FC<IDat> = ({data}) => {
   console.log(data);
   return (
     <>
@@ -46,7 +46,7 @@ export const getStaticPaths = async () => {
   }
 };
 
-export const getStaticProps = async ({params}: any) => {
+export const getStaticProps = async ({params}: ParamsProps) => {
   try {
     const res = await fetch(` https://api.tvmaze.com/shows/${params.id}`);
     const data: IDat[] = await res.json();

@@ -1,4 +1,5 @@
 export interface IDat {
+  data: IDat;
   id: number;
   image: {medium: string};
   name: string;
@@ -14,4 +15,8 @@ export interface IData {
 
 export interface CardProps {
   imageUrl: string;
+}
+
+export interface ParamsProps {
+  params: {id: string};
 }
