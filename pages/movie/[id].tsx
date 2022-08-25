@@ -4,7 +4,6 @@ import {FC} from 'react';
 import {IDat, ParamsProps} from '../../share/interface';
 
 const Index: FC<IDat> = ({data}) => {
-  console.log(data);
   return (
     <>
       <div className="text-center">

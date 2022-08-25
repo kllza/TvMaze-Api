@@ -10,7 +10,6 @@ interface CardListProps {
 }
 
 const CardList: FC<CardListProps> = ({moviesArray}) => {
-  /* console.log('esto es movie array' + moviesArray); */
   return (
     <div className="lg:flex sm:flex lg:space-x-4">
       {moviesArray.map((movie, index) => {
